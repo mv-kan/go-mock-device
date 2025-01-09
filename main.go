@@ -47,6 +47,7 @@ func main() {
 	cmd := exec.Command("socat", "-d", "-d", fmt.Sprintf("pty,raw,echo=0,link=%s", devPath), fmt.Sprintf("pty,raw,echo=0,link=%s", devPathOE))
 	cmd.Start()
 	waitForFile(devPath, time.Millisecond*50, time.Second*10)
+	waitForFile(devPathOE, time.Millisecond*50, time.Second*10)
 	defer cmd.Process.Signal(syscall.SIGINT)
 
 	baudRate := 115200
